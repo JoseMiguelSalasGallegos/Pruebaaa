@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/assets/styles.css">
+    <script src="/js/menu.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav-container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="/assets/_img/Logo C-fondo.png" alt="MedicalPro Logo">
+                </div>
+                <div class="menu-toggle" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-menu">
+                    <ul class="nav-links" id="navLinks">
+                        <li style="--i: 1"><a href="/index.html">Inicio</a></li>
+                        <li style="--i: 2"><a href="/html/quienesSomos.html">¿Quienes Somos?</a></li>
+                        <li style="--i: 3"><a href="/html/afiliacion.html">Afiliación Hospitales</a></li>
+                        <li style="--i: 4"><a href="/html/planes.html">Planes</a></li>
+                        <li style="--i: 5"><a href="/html/contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="auth-buttons">
+                    <button class="btn-index" id="btn-login" onclick="location.href='/html/login.html'">Iniciar Sesión</button>
+                    <button class="btn-index" id="btn-register" onclick="location.href='/html/registro.html'">Registrarse</button>
+                </div>
+        </nav>
+        <main class="main-content">
+            <form id="myFormRegistro" class="my-form-registro" action="registro.php" method="POST">
+                <div class="login-welcome-row">
+                    <a href="#" title="Logo">
+                        <img src="/assets/_img/Logo C-fondo.png" alt="MedicalPro" class="logo">
+                    </a>
+                    <h1>Bienvenido al Registro &#x1F44F;</h1>
+                    <p>Por favor ingresa tus datos correctamente, para registrarte en el sistema</p>
+                </div>
+                <div class="input_wrapper">
+                    <input type="text" id="nombre" name="nombre"
+                    class="input_field" placeholder="Nombre Completo" required>
+                    <label for="nombre" class="input_label">Nombre Completo:</label> 
+                </div>
+                <div class="input_wrapper">
+                    <input type="email" id="email" name="email"
+                    class="input_field" placeholder="Email" required>
+                    <label for="email" class="input_label">Correo Electrónico:</label> 
+                </div>
+                <div class="input_wrapper">
+                    <input type="tel" id="telefono" name="telefono"
+                    class="input_field" placeholder="Numero" maxlength="10" required>
+                    <label for="telefono" class="input_label">Numero de Teléfono:</label> 
+                </div>
+                <div class="input_wrapper">
+                    <input type="text" id="direccion" name="direccion"
+                    class="input_field" placeholder="Direccion" required>
+                    <label for="direccion" class="input_label">Dirección:</label> 
+                </div>
+                <div class="input_wrapper">
+                    <input id="password" type="password" name="password" class="input_field" placeholder="Contraseña"
+                    title="Introduce máximo 8 caractéres con un simbolo y un número" required>
+                    <label for="password" class="input_label">Contraseña:</label>
+                </div>
+                <div class="input_wrapper">
+                    <input id="passwordConfirm" type="password" name="passwordConfirm" class="input_field" placeholder="Contraseña"
+                    title="Las contraseñas deben de coincidir" required>
+                    <label for="passwordConfirm" class="input_label">Confirmar Contraseña:</label>
+                </div>
+                <div class="input_wrapper">
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
+                    class="input_field" placeholder="FechaNacimiento" required>
+                    <label for="fecha_nacimiento" class="input_label">Fecha de Nacimiento:</label> 
+                </div>
+                <button type="submit" class="my-form_button">Registrarse</button>
+                <p class="error escondido">Error al Registrarse</p>
+                <div class="my-form_actions">
+                    <div class="my-form_row">
+                        <span>Ya Estas Registrado?</span>
+                        <a href="/html/login.html" title="IniciarSesion">Inicia Sesión</a>
+                    </div>
+                </div>
+            </form>
+        </main>
+        <footer class="footer">
+            <div class="footer-text">
+                MedicalPro 2024 - Software para Citas Médicas
+            </div>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

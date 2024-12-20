@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/assets/styleDashboard.css">
+    <title>Configuracion Cuenta</title>
+    
+</head>
+<body>
+    <div class="container-crud-medicos">
+        <div class="content-registro-medicos" id="content">
+            <h1 class="medicos-title mb-4">Configuración de Cuenta</h1>
+            <div id="alertas"></div>
+            <div class="card">
+                <div class="card-body">
+                    <form id="formularioPerfilUsuario" action="medicosConfCuenta.php" method="POST" class="form-registro-medicos" enctype="multipart/form-data" novalidate>
+
+                        <div class="registro-medicos mb-3">
+                            <label for="nombre" class="form-label">Nombre Completo:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required
+                                   pattern="[a-záéíóúñA-ZÁÉÍÓÚÑ\s]+"
+                                   title="Solo se permiten letras y espacios">
+                            <div class="invalid-feedback">
+                                Por favor ingrese un nombre válido
+                            </div>
+                        </div>
+                        <div class="registro-medicos mb-3">
+                            <label for="telefono" class="form-label">Número Telefónico:</label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" maxlength="10" required
+                                   pattern="[\d\+\-\s]{10,}"
+                                   title="Ingrese un número telefónico válido">
+                            <div class="invalid-feedback">
+                                Por favor ingrese un número telefónico válido
+                            </div>
+                        </div>
+                        <div class="registro-medicos mb-3">
+                            <label for="especialidad" class="form-label">Especialidad:</label>
+                            <input type="text" class="form-control" id="especialidad" name="especialidad" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese la especialidad
+                            </div>
+                        </div>
+                        <div class="registro-medicos mb-3">
+                            <label for="cedula" class="form-label">Cédula Profesional:</label>
+                            <input type="text" class="form-control" id="cedula" name="cedula" maxlength="8" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese la cédula profesional
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="registro-medicos mb-3">
+                            <label for="password" class="form-label">Nueva Contraseña:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese una contraseña segura y correcta
+                            </div>
+                        </div>
+                        <div class="registro-medicos mb-3">
+                            <label for="passwordConfirm" class="form-label">Confirmar Nueva Contraseña:</label>
+                            <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" required>
+                            <div class="invalid-feedback">
+                                Por favor confirma tu contraseña -->
+                            </div>
+                        </div>
+                        <div class="registro-medicos mb-3">
+                            <label for="fotografia" class="form-label">Fotografía:</label>
+                            <input type="file" class="form-control custom-file-input" id="fotografia" name="fotografia" accept="image/jpeg,image/png" required>
+                            <div class="invalid-feedback">
+                                Por favor seleccione una imagen (JPG o PNG)
+                            </div>
+                            <div id="previewFotografia" class="file-preview mt-2"></div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Guardar Cambios
+                                
+                            </button>
+                        </div>
+                        <div id="eliminar">
+                            <label class="delete-cuenta-medico" for="delete">Eliminar Cuenta</label>
+                            <button class="btnDelete-cuenta">
+                                <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
+                              </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button class="btn btn-return w-100" onclick="window.location.href='inicioMedico.php'">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </button>
+            
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/actualizarMedicos.js"></script>
+</body>
+</html>

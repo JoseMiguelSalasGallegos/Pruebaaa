@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Citas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styleDashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.10/index.global.min.js'></script>
+</head>
+<body>
+    <header>
+        <div class="container-medicos">
+            <h1>Control de Citas Médicas</h1>
+        </div>
+    </header>
+        <div class="container-citas-medicos">
+            <div class="sidebar-citas-medicos">
+                <button class="nueva-cita-btn" onclick="openNewModalFromButton()">Nueva Cita</button>
+                <div class="proximas-citas">
+                    <h2>Próximas Citas</h2>
+                    <div id="proximas-citas-list"></div>
+                </div>
+            </div>
+            <div class="mobile-calendar-toggle">
+                <button id="mobileCalendarToggle" class="mobile-calendar-btn">
+                    <i class="fas fa-calendar"></i>
+                </button>
+            </div>
+            <div class="main-content">
+                <div class="calendar" id="calendar"></div>
+            </div>
+        </div>
+
+        <!-- Modal para insertar o editar una cita -->
+        <div id="appointmentModal" class="modal-Medicos">
+            <div class="modal-content-medicos">
+                <h2 id="modalTitle">Nueva Cita</h2>
+                <form id="appointmentForm">
+                    <div class="form-group-medicos">
+                        <label for="patientName">Nombre del Paciente:</label>
+                        <input type="text" id="patientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentDate">Fecha:</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Hora ⏲ :</label>
+                        <select id="time" required>
+                            <option value="" disabled selected>Selecciona un horario</option>
+                            <option value="08:00">8:00 AM - 8:30 AM</option>
+                            <option value="08:30">8:30 AM - 9:00 AM</option>
+                            <option value="09:00">9:00 AM - 9:30 AM</option>
+                            <option value="09:30">9:30 AM - 10:00 AM</option>
+                            <option value="10:00">10:00 AM - 10:30 AM</option>
+                            <option value="10:30">10:30 AM - 11:00 AM</option>
+                            <option value="11:00">11:00 AM - 11:30 AM</option>
+                            <option value="11:30">11:30 AM - 12:00 PM</option>
+                            <option value="12:00">12:00 PM - 12:30 PM</option>
+                            <option value="12:30">12:30 PM - 1:00 PM</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="appointmentType">Tipo de Cita:</label>
+                        <select id="appointmentType" required>
+                            <option value="general">Consulta General</option>
+                            <option value="specialist">Especialista</option>
+                            <option value="urgencia">Urgencia</option>
+                        </select>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="notes">Notas:</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="nueva-cita-btn" style="background-color: #6c757d;" onclick="closeModal()">Cancelar</button>
+                        <button type="submit" class="nueva-cita-btn">Guardar</button>
+                        <button type="button" id="deleteButton" class="nueva-cita-btn" style="background-color: #dc3545;" onclick="deleteAppointment()">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button class="regresar-medicos" onclick="retroceder()"><i class="fas fa-arrow-left"></i> Regresar</button>
+    <script defer src="controlCitasMedico.js"></script>
+</body>
+</html>

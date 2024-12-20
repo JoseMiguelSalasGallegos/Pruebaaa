@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="menu.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Iniciar Sesion</title>
+</head>
+<body>
+    <nav class="menu">
+        <ul>
+            <li class="logo">
+                  <img src="Logo C-fondo.png" alt="Logo"> 
+            </li>
+            <button class="menu-toggle">☰</button>
+            <div class="menu-item">
+                <li><a href="/index.html">Inicio</a></li>
+                <li><a href="/quienesSomos.html">¿Quienes Somos?</a></li>
+                <li><a href="/afiliacion.html">Afiliación de Hospitales</a></li>
+                <li><a href="/planes.html">Planes</a></li>
+                <li><a href="/contacto.html">Contacto</a></li>
+            </div>
+            <div class="auth-buttons">
+                <button id="btn-login">Iniciar Sesión</button>
+                <button id="btn-register" onclick="registro()">Registrarse</button>
+            </div>
+        </ul>
+    </nav>
+    <form action="login.php" method="POST">
+                <div class="login-welcome-row">
+                    <a href="#" title="Logo">
+                        <img src="/assets/_img/Logo C-fondo.png" alt="MedicalPro" class="logo">
+                    </a>
+                    <h1>Bienvenido de Nuevo &#x1F44F;</h1>
+                    <p>Por favor ingresa tus datos para que accedas a tu cuenta</p>
+                </div>
+                <div class="input_wrapper">
+                    <input type="email" id="email" name="email"
+                    class="input_field" placeholder="Email" required>
+                    <label for="email" class="input_label">Correo Electrónico:</label> 
+                </div>
+                <div class="input_wrapper">
+                    <input id="password" type="password" name="password" class="input_field" placeholder="Contraseña"
+                    title="Introduce máximo 8 caractéres con un simbolo y un número">
+                    <label for="password" class="input_label">Contraseña:</label>
+                </div>
+                <div>
+                    <p class="page-link">
+                        <span class="page-link-label">Olvidaste tu Contraseña?  <a href="/html/contraseña.html">Click Aquí...!!</a></span>
+                    </p>
+                </div>
+                <button type="submit" class="my-form_button">Iniciar Sesión</button>
+                
+                <p class="error escondido">Error al Iniciar Sesión</p>
+                <div class="my-form_actions">
+                    <div class="my-form_row">
+                        <span>No Tienes una Cuenta?</span>
+                        <a href="/html/registro.html" title="CrearCuenta">Registrate</a>
+                    </div>
+                </div>
+            </form>
+    <footer class="footer">
+        <div class="footer-text">
+            MedicalPro 2024 - Software para Citas Médicas
+        </div>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+
+    <!-- Script para detectar el botón de retroceso -->
+    <script>
+        // Detectar cuando el usuario presiona el botón de retroceso
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                // Si la página está cargada desde el caché del navegador, redirigir al logout
+                window.location.href = "logout.php";
+            }
+        });
+    </script>
+    <script>
+        // Detectar cuando el usuario presiona el botón de retroceso
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+                // Redirigir a la página de inicio 
+                window.location.href = "/index.html";
+            }
+        });
+    </script>
+</body>
+</html>

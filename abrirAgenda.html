@@ -1,0 +1,351 @@
+<div id="formularioConsultorio" class="formulario">
+    <h2>Datos del Nuevo Consultorio</h2>
+    <form action="guardarAgenda.php" method="POST">
+      <div class="campo">
+        <label for="direccion">Dirección:</label>
+        <input 
+          type="text" 
+          id="direccion" 
+          name="direccion" 
+          placeholder="Ejemplo: Av. Principal #123, Piso 2"
+          pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1\s,.-/#°]+$" 
+          title="La dirección solo puede incluir letras, números, espacios y caracteres como ,.-/#°"
+          required>
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Número de Teléfono:</label>
+        <input 
+          type="tel" 
+          id="telefono" 
+          name="telefono"
+          placeholder="Ejemplo: 2141481254"
+          maxlength="10"
+          pattern="^[0-9]{10}$"
+          title="Debe ser un número de 10 dígitos sin espacios ni caracteres especiales."
+          required>
+      </div>
+
+      <div class="campo">
+        <label for="email">Correo Electrónico:</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email"
+          placeholder="Ejemplo: citasmedicas@software.com"
+          title="Ingresa un correo electrónico válido."
+          required>
+      </div>
+
+      <div class="campo">
+        <label for="alias">Alias:</label>
+        <input 
+          type="text" 
+          id="alias" 
+          name="alias"
+          placeholder="Ejemplo: Cercas de Recepción"
+          pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+( [a-zA-ZÀ-ÿ\u00f1\u00d1]+)*$" 
+          title="El alias debe contener solo letras y espacios."
+          required>
+      </div>
+
+      <div class="campo">
+        <label for="encargado">Encargado:</label>
+        <input 
+          type="text" 
+          id="encargado" 
+          name="encargado"
+          placeholder="Ejemplo: Jose Miguel Salas Gallegos"
+          pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+( [a-zA-ZÀ-ÿ\u00f1\u00d1]+)*$" 
+          title="El nombre del encargado debe contener solo letras y espacios."
+          required>
+      </div>
+
+      <button type="submit" class="boton-grande">
+        Guardar Consultorio
+      </button>
+    </form>
+</div>
+
+
+
+
+<div id="modalEditarConsultorio" class="modal">
+  <div class="modal-content-consultorio">
+      <span class="close" onclick="cerrarModalEditar()">&times;</span>
+      <h2>Editar Consultorio</h2>
+      <form id="formEditar" action="actualizarConsultorio.php" method="POST">
+          <!-- Campo oculto para enviar el ID del consultorio -->
+          <input type="hidden" id="idConsultorio" name="idConsultorio" required>
+          
+          <div class="campo">
+              <label for="direccionEditar">Dirección:</label>
+              <input 
+                  type="text" 
+                  id="direccionEditar" 
+                  name="ubicacion" 
+                  placeholder="Ejemplo: Av. Principal #123, Piso 2"
+                  pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1\s,.-/#°]+$" 
+                  required>
+          </div>
+          <div class="campo">
+              <label for="telefonoEditar">Número de Teléfono:</label>
+              <input 
+                  type="tel" 
+                  id="telefonoEditar" 
+                  name="telefono"
+                  maxlength="10"
+                  pattern="^[0-9]{10}$"
+                  placeholder="Ejemplo: 2141481254"
+                  required>
+          </div>
+          <div class="campo">
+              <label for="emailEditar">Correo Electrónico:</label>
+              <input 
+                  type="email" 
+                  id="emailEditar" 
+                  name="email"
+                  placeholder="Ejemplo: citasmedicas@software.com"
+                  required>
+          </div>
+          <div class="campo">
+              <label for="aliasEditar">Alias:</label>
+              <input 
+                  type="text" 
+                  id="aliasEditar" 
+                  name="alias"
+                  pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+( [a-zA-ZÀ-ÿ\u00f1\u00d1]+)*$" 
+                  placeholder="Ejemplo: Cercas de Recepción"
+                  required>
+          </div>
+          <div class="campo">
+              <label for="encargadoEditar">Encargado:</label>
+              <input 
+                  type="text" 
+                  id="encargadoEditar" 
+                  name="encargado"
+                  pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+( [a-zA-ZÀ-ÿ\u00f1\u00d1]+)*$" 
+                  placeholder="Ejemplo: Jose Miguel Salas Gallegos"
+                  required>
+          </div>
+          <button type="submit" class="boton-grande">Guardar Cambios</button>
+      </form>
+  </div>
+</div>
+
+
+
+<div id="modalCierreTemporal" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="cerrarModalCierreTemporal()">&times;</span>
+      <h2>Gestionar Cierre Temporal</h2>
+      
+      <div id="mensajeCierreActual" style="display: none;">
+          <h3>Estado Actual del Cierre</h3>
+          <div id="infoCierreActual" class="info-cierre-actual"></div>
+          <button id="btnReactivar" class="boton-grande boton-verde" onclick="reactivarConsultorio()">
+              Reactivar Consultorio
+          </button>
+      </div>
+      
+      <form id="formCierre" onsubmit="registrarCierreTemporal(event)">
+          <div class="campo">
+              <label for="fechaInicioCierre">Fecha de Cierre:</label>
+              <input 
+                  type="date" 
+                  id="fechaInicioCierre" 
+                  required
+                  min="<?php echo date('Y-m-d'); ?>"
+              >
+          </div>
+          
+          <div class="campo">
+              <label for="fechaFinCierre">Fecha de Reapertura:</label>
+              <input 
+                  type="date" 
+                  id="fechaFinCierre" 
+                  required
+                  min="<?php echo date('Y-m-d'); ?>"
+              >
+          </div>
+          
+          <div class="campo">
+              <label for="motivoCierre">Motivo del Cierre:</label>
+              <textarea 
+                  id="motivoCierre" 
+                  rows="3" 
+                  placeholder="Explique el motivo del cierre temporal"
+                  required
+              ></textarea>
+          </div>
+          
+          <button type="submit" class="boton-grande boton-amarillo">
+              Registrar Cierre Temporal
+          </button>
+      </form>
+  </div>
+</div>
+
+
+
+
+<div id="modalHorarios" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Agregar Horario de Atención</h2>
+        <form id="formHorarios" onsubmit="guardarHorario(event)">
+            <h3>Selecciona los días:</h3>
+            <div class="dias-semana">
+                <input type="checkbox" id="lunes" class="dia-checkbox">
+                <label for="lunes" class="dia-label">Lunes</label>
+                
+                <input type="checkbox" id="martes" class="dia-checkbox">
+                <label for="martes" class="dia-label">Martes</label>
+                
+                <input type="checkbox" id="miercoles" class="dia-checkbox">
+                <label for="miercoles" class="dia-label">Miércoles</label>
+                
+                <input type="checkbox" id="jueves" class="dia-checkbox">
+                <label for="jueves" class="dia-label">Jueves</label>
+                
+                <input type="checkbox" id="viernes" class="dia-checkbox">
+                <label for="viernes" class="dia-label">Viernes</label>
+                
+                <input type="checkbox" id="sabado" class="dia-checkbox">
+                <label for="sabado" class="dia-label">Sábado</label>
+                
+                <input type="checkbox" id="domingo" class="dia-checkbox">
+                <label for="domingo" class="dia-label">Domingo</label>
+            </div>
+
+            <div class="horarios-seleccion">
+                <h3>Selecciona el horario:</h3>
+                <div class="horario-input">
+                    <span>De:</span>
+                    <select id="horaInicio" required>
+                        <option value="">Seleccione hora</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                    </select>
+                    
+                    <span>Hasta:</span>
+                    <select id="horaFin" required>
+                        <option value="">Seleccione hora</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="boton-grande">Guardar Horario</button>
+        </form>
+    </div>
+</div>
+<div id="modalEditarHorario" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModalEditarHorario()">&times;</span>
+        <h2>Editar Horario de Atención</h2>
+        <form id="formEditarHorario" onsubmit="actualizarHorario(event)">
+            <h3>Selecciona los días:</h3>
+            <div class="dias-semana">
+                <input type="checkbox" id="lunesEditar" class="dia-checkbox">
+                <label for="lunesEditar" class="dia-label">Lunes</label>
+                
+                <input type="checkbox" id="martesEditar" class="dia-checkbox">
+                <label for="martesEditar" class="dia-label">Martes</label>
+                
+                <input type="checkbox" id="miercolesEditar" class="dia-checkbox">
+                <label for="miercolesEditar" class="dia-label">Miércoles</label>
+                
+                <input type="checkbox" id="juevesEditar" class="dia-checkbox">
+                <label for="juevesEditar" class="dia-label">Jueves</label>
+                
+                <input type="checkbox" id="viernesEditar" class="dia-checkbox">
+                <label for="viernesEditar" class="dia-label">Viernes</label>
+                
+                <input type="checkbox" id="sabadoEditar" class="dia-checkbox">
+                <label for="sabadoEditar" class="dia-label">Sábado</label>
+                
+                <input type="checkbox" id="domingoEditar" class="dia-checkbox">
+                <label for="domingoEditar" class="dia-label">Domingo</label>
+            </div>
+
+            <div class="horarios-seleccion">
+                <h3>Selecciona el horario:</h3>
+                <div class="horario-input">
+                    <span>De:</span>
+                    <select id="horaInicioEditar" required>
+                        <option value="">Seleccione hora</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                    </select>
+                    
+                    <span>Hasta:</span>
+                    <select id="horaFinEditar" required>
+                        <option value="">Seleccione hora</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="boton-grande">Guardar Cambios</button>
+        </form>
+    </div>
+</div>
+<div class="atras">
+    <button class="inicio" onclick="inicio()"><i class="fas fa-home"></i> Inicio</button>
+    <button onclick="regresar()"><i class="fas fa-arrow-left"></i>Regresar</button>  
+</div>
+<script defer src="/js/abrirAgenda.js"></script>
+<script src="/js/helpBtn.js"></script>
+</body>
+</html>
